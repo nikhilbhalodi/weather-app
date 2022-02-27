@@ -56,13 +56,9 @@ def rainfall_data(request):
     for i in range(len(arrays)):
         dfn[columns[i]] = np.array(arrays[i])
         same_size_dict[columns[i]] = arrays[i]
-    # print(same_size_dict)
-    # df = pd.DataFrame.from_dict(new, orient='index')
     df = pd.DataFrame(same_size_dict)
-    
     df_last_5 = df.tail(5)
     dfn = df_last_5.set_index('year').T.to_dict('list')
-    print(dfn)
     plt.plot(df.iloc[-3:])
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
